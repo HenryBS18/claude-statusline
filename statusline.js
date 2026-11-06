@@ -157,7 +157,8 @@ function build(d) {
       gauge('5h', rl.five_hour.used_percentage || 0, countdown(rl.five_hour.resets_at))))
   }
   if (rl.seven_day) {
-    segs.push(Object.assign({ row: 2, prio: 6 }, gauge('7d', rl.seven_day.used_percentage || 0)))
+    segs.push(Object.assign({ row: 2, prio: 6 },
+      gauge('7d', rl.seven_day.used_percentage || 0, countdown(rl.seven_day.resets_at))))
   }
   return segs
 }
