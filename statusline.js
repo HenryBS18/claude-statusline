@@ -160,6 +160,13 @@ function build(d) {
     segs.push(Object.assign({ row: 2, prio: 6 },
       gauge('7d', rl.seven_day.used_percentage || 0, countdown(rl.seven_day.resets_at))))
   }
+
+  const usd = d.cost && d.cost.total_cost_usd
+  // rate_limits only arrive on subscription plans, where the cost isn't billed.
+  if (typeof usd === 'number' && !rl.five_hour && !rl.seven_day) {
+    const txt = '$' + usd.toFixed(2)
+    segs.push({ row: 2, prio: 5, plain: txt, colored: NEON + txt + RESET })
+  }
   return segs
 }
 
